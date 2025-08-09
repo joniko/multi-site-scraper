@@ -22,8 +22,10 @@ const buildSearchUrl = (page) => {
     return `${SEARCH}?${params.toString()}`;
 };
 const getTotalPages = async (page) => {
-    await (0, browser_1.navigateWithRetry)(page, buildSearchUrl(1), 3, 'networkidle2');
-    await page.waitForSelector('.card-deck');
+    // Empezar por la página 0 (la UI muestra 1, pero el query es 0-based)
+    await (0, browser_1.navigateWithRetry)(page, buildSearchUrl(0), 3, 'networkidle2');
+    await page.waitForFunction(() => new URL(window.location.href).searchParams.get('page') === '0', { timeout: 15000 });
+    await page.waitForFunction((sels) => sels.some((sel) => !!document.querySelector(sel)), { timeout: 15000 }, ['.card-deck', '.view-content', '.cards', '.search-results']);
     const pages = await page.$$eval('.pager li a', (as) => as
         .map((a) => (a.textContent || '').trim())
         .filter((t) => /^\d+$/.test(t))
@@ -35,10 +37,17 @@ const getTotalPages = async (page) => {
 exports.getTotalPages = getTotalPages;
 const extractLinksFromPage = async (page, pageNum) => {
     await (0, browser_1.navigateWithRetry)(page, buildSearchUrl(pageNum), 3, 'networkidle2');
-    await page.waitForSelector('.card-deck');
-    const links = await page.$$eval('.card-deck a.card', (cards) => cards
-        .map((c) => c.href)
-        .filter((href) => href && href.includes('/organizacion/')));
+    // Confirmar que la URL activa contiene el page correcto (la web no cambia la URL al navegar manualmente)
+    await page.waitForFunction((expected) => new URL(window.location.href).searchParams.get('page') === String(expected), { timeout: 15000 }, pageNum);
+    // Esperar a que el contenedor de resultados esté presente
+    await page.waitForFunction((sels) => sels.some((sel) => !!document.querySelector(sel)), { timeout: 15000 }, ['.card-deck', '.view-content', '.cards', '.search-results']);
+    // Extraer enlaces de tarjetas, siendo tolerantes con variaciones de markup
+    const links = await page.$$eval(['.card-deck a.card', '.view-content a', '.cards a', '.search-results a'].join(','), (nodes) => {
+        const urls = Array.from(nodes)
+            .map((n) => n.href)
+            .filter((href) => href && href.includes('/organizacion/'));
+        return Array.from(new Set(urls));
+    });
     return links;
 };
 exports.extractLinksFromPage = extractLinksFromPage;
@@ -101,9 +110,17 @@ const extractOrganization = async (browser, url, timeoutMs) => {
 };
 exports.extractOrganization = extractOrganization;
 const runBAScraper = async (page, options) => {
-    const totalPages = await (0, exports.getTotalPages)(page);
-    const lastPage = options.endPage ? Math.min(options.endPage, totalPages) : totalPages;
-    logger_1.logger.info(`Páginas totales: ${totalPages}. Rango a procesar: ${options.startPage}-${lastPage}`);
+    // Si se provee endPage, respetamos el rango explícito sin depender de la detección automática
+    let lastPage;
+    if (typeof options.endPage === 'number') {
+        lastPage = options.endPage;
+        logger_1.logger.info(`Rango a procesar (forzado): ${options.startPage}-${lastPage}`);
+    }
+    else {
+        const totalPages = await (0, exports.getTotalPages)(page);
+        lastPage = totalPages;
+        logger_1.logger.info(`Páginas totales detectadas: ${totalPages}. Rango a procesar: ${options.startPage}-${lastPage}`);
+    }
     // Reusar la misma page para listar links por página
     const allLinks = [];
     for (let p = options.startPage; p <= lastPage; p++) {
