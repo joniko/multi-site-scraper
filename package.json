@@ -12,6 +12,7 @@
     "eventick": "npm run build && node dist/cli/eventick.js",
     "eventick:dev": "tsx src/cli/eventick.ts",
     "test:eventick": "tsx src/cli/test-eventick.ts",
+    "extract:all": "tsx src/cli/extract-all-eventick.ts",
     "test": "echo 'no tests'"
   },
   "dependencies": {
