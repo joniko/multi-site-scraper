@@ -9,7 +9,6 @@ const ora_1 = __importDefault(require("ora"));
 const browser_1 = require("./utils/browser");
 const logger_1 = require("./utils/logger");
 const ba_1 = require("./scrapers/ba");
-const csv_1 = require("./utils/csv");
 const program = new commander_1.Command();
 program
     .name('ba-organizaciones-scraper')
@@ -35,7 +34,8 @@ async function main() {
             timeoutMs: opts.timeout,
             concurrency: opts.concurrency,
             startPage: opts.start,
-            endPage: opts.end
+            endPage: opts.end,
+            outputPath: opts.output
         });
         const duration = ((Date.now() - started) / 1000).toFixed(1);
         const ok = results.filter((r) => r.success);
@@ -43,7 +43,8 @@ async function main() {
         console.log(chalk_1.default.green(`\n✅ Scraping completado en ${duration}s`));
         console.log(chalk_1.default.green(`   Registros OK: ${ok.length}`));
         console.log(chalk_1.default.yellow(`   Registros con error: ${fail}`));
-        await (0, csv_1.writeCsv)(opts.output, results);
+        // Ya escribimos incrementalmente; no sobrescribir el CSV al final para no duplicar
+        // Si se desea exportar un snapshot completo aparte, se puede usar otra ruta de salida.
         console.log(chalk_1.default.cyan(`\n📄 CSV guardado en ${opts.output}`));
     }
     catch (err) {

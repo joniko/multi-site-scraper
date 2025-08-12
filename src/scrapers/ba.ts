@@ -3,6 +3,7 @@ import { Browser, Page } from 'puppeteer';
 import { Organization, OrganizationSchema } from '../types/organization';
 import { navigateWithRetry, newPage, safeText } from '../utils/browser';
 import { logger } from '../utils/logger';
+import { appendCsv } from '../utils/csv';
 
 const BASE = 'https://buenosaires.gob.ar';
 const SEARCH = `${BASE}/organizaciones-civiles-buscador`;
@@ -139,6 +140,7 @@ export interface RunOptions {
   concurrency: number;
   startPage: number;
   endPage?: number;
+  outputPath: string;
 }
 
 export const runBAScraper = async (
@@ -156,21 +158,31 @@ export const runBAScraper = async (
     logger.info(`Páginas totales detectadas: ${totalPages}. Rango a procesar: ${options.startPage}-${lastPage}`);
   }
 
-  // Reusar la misma page para listar links por página
-  const allLinks: string[] = [];
+  // Reusar la misma page para listar links por página y procesar por lotes con escritura incremental
+  const allResults: Organization[] = [];
   for (let p = options.startPage; p <= lastPage; p++) {
     const links = await extractLinksFromPage(page, p);
     logger.info(`Página ${p}: ${links.length} enlaces`);
-    allLinks.push(...links);
+
+    const limit = pLimit(options.concurrency);
+    const tasks = links.map((url) =>
+      limit(() => extractOrganization(options.browser, url, options.timeoutMs))
+    );
+    const batch = await Promise.all(tasks);
+
+    // Escritura incremental por página
+    try {
+      await appendCsv(options.outputPath, batch);
+      logger.info(`Escritos ${batch.length} registros al CSV (página ${p}).`);
+    } catch (err) {
+      logger.warn(`Error escribiendo CSV en página ${p}: ${(err as Error).message}`);
+    }
+
+    allResults.push(...batch);
     await page.waitForTimeout(500);
   }
 
-  const limit = pLimit(options.concurrency);
-  const tasks = allLinks.map((url) =>
-    limit(() => extractOrganization(options.browser, url, options.timeoutMs))
-  );
-  const results = await Promise.all(tasks);
-  return results;
+  return allResults;
 };
 
 

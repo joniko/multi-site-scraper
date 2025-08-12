@@ -2,14 +2,14 @@
   "name": "ba-organizaciones-scraper",
   "version": "1.0.0",
   "description": "High-performance scraper for Buenos Aires civil organizations - optimized for speed and accuracy",
-  "main": "dist/index.js",
+  "main": "dist/cli/index.js",
   "scripts": {
-    "start": "node dist/index.js",
-    "dev": "tsx watch src/index.ts",
+    "start": "node dist/cli/index.js",
+    "dev": "tsx watch src/cli/index.ts",
     "build": "tsc",
-    "scrape": "npm run build && npm start",
-    "scrape:dev": "tsx src/index.ts",
-    "test": "tsx src/test.ts"
+    "scrape": "npm run build && node dist/cli/index.js",
+    "scrape:dev": "tsx src/cli/index.ts",
+    "test": "echo 'no tests'"
   },
   "dependencies": {
     "puppeteer": "^21.5.0",

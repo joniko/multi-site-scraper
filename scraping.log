@@ -1,0 +1,172 @@
+
+> ba-organizaciones-scraper@1.0.0 start
+> node dist/index.js --headless --start 0 --end 56
+
+- Inicializando navegador...
+[1m[43m[30m
+  Puppeteer old Headless deprecation warning:[0m[33m
+    In the near future `headless: true` will default to the new Headless mode
+    for Chrome instead of the old Headless implementation. For more
+    information, please see https://developer.chrome.com/articles/new-headless/.
+    Consider opting in early by passing `headless: "new"` to `puppeteer.launch()`
+    If you encounter any bugs, please report them to https://github.com/puppeteer/puppeteer/issues/new/choose.[0m
+
+✔ Navegador listo
+2025-08-09T18:46:20.657Z [info] Inicio scraping: headless=true, concurrency=6
+2025-08-09T18:46:20.658Z [info] Rango a procesar (forzado): 0-56
+2025-08-09T18:46:23.575Z [info] Página 0: 12 enlaces
+2025-08-09T18:46:30.317Z [info] Escritos 12 registros al CSV (página 0).
+2025-08-09T18:46:33.268Z [info] Página 1: 12 enlaces
+2025-08-09T18:46:41.818Z [info] Escritos 12 registros al CSV (página 1).
+2025-08-09T18:46:44.776Z [info] Página 2: 12 enlaces
+2025-08-09T18:46:52.535Z [info] Escritos 12 registros al CSV (página 2).
+2025-08-09T18:46:54.879Z [info] Página 3: 12 enlaces
+2025-08-09T18:47:02.552Z [info] Escritos 12 registros al CSV (página 3).
+2025-08-09T18:47:05.724Z [info] Página 4: 12 enlaces
+2025-08-09T18:47:17.182Z [info] Escritos 12 registros al CSV (página 4).
+2025-08-09T18:47:20.283Z [info] Página 5: 12 enlaces
+2025-08-09T18:47:28.697Z [info] Escritos 12 registros al CSV (página 5).
+2025-08-09T18:47:32.040Z [info] Página 6: 12 enlaces
+2025-08-09T18:47:43.676Z [info] Escritos 12 registros al CSV (página 6).
+2025-08-09T18:47:46.859Z [info] Página 7: 12 enlaces
+2025-08-09T18:48:00.606Z [info] Escritos 12 registros al CSV (página 7).
+2025-08-09T18:48:03.748Z [info] Página 8: 12 enlaces
+2025-08-09T18:48:12.527Z [info] Escritos 12 registros al CSV (página 8).
+2025-08-09T18:48:15.250Z [info] Página 9: 12 enlaces
+2025-08-09T18:48:24.235Z [info] Escritos 12 registros al CSV (página 9).
+2025-08-09T18:48:26.933Z [info] Página 10: 12 enlaces
+2025-08-09T18:48:34.641Z [info] Escritos 12 registros al CSV (página 10).
+2025-08-09T18:48:37.592Z [info] Página 11: 12 enlaces
+2025-08-09T18:48:49.021Z [info] Escritos 12 registros al CSV (página 11).
+2025-08-09T18:48:51.811Z [info] Página 12: 12 enlaces
+2025-08-09T18:49:05.856Z [info] Escritos 12 registros al CSV (página 12).
+2025-08-09T18:49:08.527Z [info] Página 13: 12 enlaces
+2025-08-09T18:49:10.703Z [warn] Fallo extrayendo https://buenosaires.gob.ar/organizacion/fundacion-defensalud: Requesting main frame too early!
+Error crítico: Protocol error: Connection closed. Most likely the page has been closed.
+Error: Protocol error: Connection closed. Most likely the page has been closed.
+    at assert (/Users/joflores/Documents/GitHub/ba-organizaciones-scraper/node_modules/puppeteer-core/lib/cjs/puppeteer/util/assert.js:18:15)
+    at CdpPage.close (/Users/joflores/Documents/GitHub/ba-organizaciones-scraper/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/Page.js:848:32)
+    at main (/Users/joflores/Documents/GitHub/ba-organizaciones-scraper/dist/index.js:54:20)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:575:9)
+    at process.processTimers (node:internal/timers:549:7)
+
+> ba-organizaciones-scraper@1.0.0 start
+> node dist/index.js --headless --start 13 --end 56 --output organizaciones_ba.csv
+
+- Inicializando navegador...
+[1m[43m[30m
+  Puppeteer old Headless deprecation warning:[0m[33m
+    In the near future `headless: true` will default to the new Headless mode
+    for Chrome instead of the old Headless implementation. For more
+    information, please see https://developer.chrome.com/articles/new-headless/.
+    Consider opting in early by passing `headless: "new"` to `puppeteer.launch()`
+    If you encounter any bugs, please report them to https://github.com/puppeteer/puppeteer/issues/new/choose.[0m
+
+✔ Navegador listo
+2025-08-09T20:23:33.040Z [info] Inicio scraping: headless=true, concurrency=6
+2025-08-09T20:23:33.041Z [info] Rango a procesar (forzado): 13-56
+2025-08-09T20:23:37.972Z [info] Página 13: 12 enlaces
+2025-08-09T20:23:53.825Z [info] Escritos 12 registros al CSV (página 13).
+2025-08-09T20:23:57.722Z [info] Página 14: 12 enlaces
+2025-08-09T20:24:16.075Z [info] Escritos 12 registros al CSV (página 14).
+2025-08-09T20:24:18.433Z [info] Página 15: 12 enlaces
+2025-08-09T20:24:30.913Z [info] Escritos 12 registros al CSV (página 15).
+2025-08-09T20:24:33.419Z [info] Página 16: 12 enlaces
+2025-08-09T20:24:45.247Z [info] Escritos 12 registros al CSV (página 16).
+2025-08-09T20:24:47.342Z [info] Página 17: 12 enlaces
+2025-08-09T20:24:59.182Z [info] Escritos 12 registros al CSV (página 17).
+2025-08-09T20:25:01.347Z [info] Página 18: 12 enlaces
+2025-08-09T20:25:13.279Z [info] Escritos 12 registros al CSV (página 18).
+2025-08-09T20:25:15.416Z [info] Página 19: 12 enlaces
+2025-08-09T20:25:28.062Z [info] Escritos 12 registros al CSV (página 19).
+2025-08-09T20:25:30.547Z [info] Página 20: 12 enlaces
+2025-08-09T20:25:45.961Z [info] Escritos 12 registros al CSV (página 20).
+2025-08-09T20:25:48.118Z [info] Página 21: 12 enlaces
+2025-08-09T20:26:03.085Z [info] Escritos 12 registros al CSV (página 21).
+2025-08-09T20:26:05.254Z [info] Página 22: 12 enlaces
+2025-08-09T20:26:16.826Z [info] Escritos 12 registros al CSV (página 22).
+2025-08-09T20:26:18.950Z [info] Página 23: 12 enlaces
+2025-08-09T20:26:32.575Z [info] Escritos 12 registros al CSV (página 23).
+2025-08-09T20:26:34.915Z [info] Página 24: 12 enlaces
+2025-08-09T20:26:47.397Z [info] Escritos 12 registros al CSV (página 24).
+2025-08-09T20:26:49.585Z [info] Página 25: 12 enlaces
+2025-08-09T20:27:03.067Z [info] Escritos 12 registros al CSV (página 25).
+2025-08-09T20:27:05.394Z [info] Página 26: 12 enlaces
+2025-08-09T20:27:16.872Z [info] Escritos 12 registros al CSV (página 26).
+2025-08-09T20:27:20.140Z [info] Página 27: 12 enlaces
+2025-08-09T20:27:33.050Z [info] Escritos 12 registros al CSV (página 27).
+2025-08-09T20:27:35.595Z [info] Página 28: 12 enlaces
+2025-08-09T20:27:47.849Z [info] Escritos 12 registros al CSV (página 28).
+2025-08-09T20:27:50.037Z [info] Página 29: 12 enlaces
+2025-08-09T20:28:01.878Z [info] Escritos 12 registros al CSV (página 29).
+2025-08-09T20:28:04.399Z [info] Página 30: 12 enlaces
+2025-08-09T20:28:18.718Z [info] Escritos 12 registros al CSV (página 30).
+2025-08-09T20:28:20.817Z [info] Página 31: 12 enlaces
+2025-08-09T20:28:31.597Z [info] Escritos 12 registros al CSV (página 31).
+2025-08-09T20:28:36.923Z [info] Página 32: 12 enlaces
+2025-08-09T20:28:49.805Z [info] Escritos 12 registros al CSV (página 32).
+2025-08-09T20:28:54.890Z [info] Página 33: 12 enlaces
+2025-08-09T20:29:07.680Z [info] Escritos 12 registros al CSV (página 33).
+2025-08-09T20:29:12.498Z [info] Página 34: 12 enlaces
+2025-08-09T20:29:29.529Z [info] Escritos 12 registros al CSV (página 34).
+2025-08-09T20:29:34.146Z [info] Página 35: 12 enlaces
+2025-08-09T20:29:45.722Z [info] Escritos 12 registros al CSV (página 35).
+2025-08-09T20:29:49.994Z [info] Página 36: 12 enlaces
+2025-08-09T20:30:02.348Z [info] Escritos 12 registros al CSV (página 36).
+2025-08-09T20:30:07.676Z [info] Página 37: 12 enlaces
+2025-08-09T20:30:19.965Z [info] Escritos 12 registros al CSV (página 37).
+2025-08-09T20:30:24.460Z [info] Página 38: 12 enlaces
+2025-08-09T20:30:36.834Z [info] Escritos 12 registros al CSV (página 38).
+2025-08-09T20:30:41.380Z [info] Página 39: 12 enlaces
+2025-08-09T20:30:54.355Z [info] Escritos 12 registros al CSV (página 39).
+2025-08-09T20:30:59.131Z [info] Página 40: 12 enlaces
+2025-08-09T20:31:12.873Z [info] Escritos 12 registros al CSV (página 40).
+2025-08-09T20:31:17.565Z [info] Página 41: 12 enlaces
+2025-08-09T20:31:29.457Z [info] Escritos 12 registros al CSV (página 41).
+2025-08-09T20:31:34.117Z [info] Página 42: 12 enlaces
+2025-08-09T20:31:47.410Z [info] Escritos 12 registros al CSV (página 42).
+2025-08-09T20:31:51.846Z [info] Página 43: 12 enlaces
+2025-08-09T20:32:03.052Z [info] Escritos 12 registros al CSV (página 43).
+2025-08-09T20:32:08.160Z [info] Página 44: 12 enlaces
+2025-08-09T20:32:20.803Z [info] Escritos 12 registros al CSV (página 44).
+2025-08-09T20:32:25.270Z [info] Página 45: 12 enlaces
+2025-08-09T20:32:36.706Z [info] Escritos 12 registros al CSV (página 45).
+2025-08-09T20:32:42.477Z [info] Página 46: 12 enlaces
+2025-08-09T20:32:54.927Z [info] Escritos 12 registros al CSV (página 46).
+2025-08-09T20:33:00.121Z [info] Página 47: 12 enlaces
+2025-08-09T20:33:13.479Z [info] Escritos 12 registros al CSV (página 47).
+2025-08-09T20:33:18.378Z [info] Página 48: 12 enlaces
+2025-08-09T20:33:32.423Z [info] Escritos 12 registros al CSV (página 48).
+2025-08-09T20:33:37.963Z [info] Página 49: 12 enlaces
+2025-08-09T20:33:49.608Z [info] Escritos 12 registros al CSV (página 49).
+2025-08-09T20:33:54.952Z [info] Página 50: 12 enlaces
+2025-08-09T20:34:08.223Z [info] Escritos 12 registros al CSV (página 50).
+2025-08-09T20:34:13.451Z [info] Página 51: 12 enlaces
+2025-08-09T20:34:25.303Z [info] Escritos 12 registros al CSV (página 51).
+2025-08-09T20:34:30.060Z [info] Página 52: 12 enlaces
+2025-08-09T20:34:41.470Z [info] Escritos 12 registros al CSV (página 52).
+2025-08-09T20:34:46.314Z [info] Página 53: 12 enlaces
+2025-08-09T20:35:00.031Z [info] Escritos 12 registros al CSV (página 53).
+2025-08-09T20:35:04.428Z [info] Página 54: 12 enlaces
+2025-08-09T20:35:15.500Z [info] Escritos 12 registros al CSV (página 54).
+2025-08-09T20:35:20.484Z [info] Página 55: 12 enlaces
+2025-08-09T20:35:28.274Z [warn] Fallo extrayendo https://buenosaires.gob.ar/organizacion/sumando-iniciativas-de-cambio-asociacion-civil: [
+  {
+    "validation": "email",
+    "code": "invalid_string",
+    "message": "Invalid email",
+    "path": [
+      "email"
+    ]
+  }
+]
+2025-08-09T20:35:31.188Z [info] Escritos 12 registros al CSV (página 55).
+2025-08-09T20:35:36.100Z [info] Página 56: 2 enlaces
+2025-08-09T20:35:42.121Z [info] Escritos 2 registros al CSV (página 56).
+
+✅ Scraping completado en 729.6s
+   Registros OK: 517
+   Registros con error: 1
+
+📄 CSV guardado en organizaciones_ba.csv

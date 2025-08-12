@@ -9,5 +9,6 @@ export interface RunOptions {
     concurrency: number;
     startPage: number;
     endPage?: number;
+    outputPath: string;
 }
 export declare const runBAScraper: (page: Page, options: RunOptions) => Promise<Organization[]>;

@@ -4,7 +4,7 @@ import ora from 'ora';
 import { launchBrowser, newPage } from './utils/browser';
 import { logger } from './utils/logger';
 import { runBAScraper } from './scrapers/ba';
-import { writeCsv } from './utils/csv';
+import { writeCsv, appendCsv } from './utils/csv';
 
 const program = new Command();
 
@@ -42,7 +42,8 @@ async function main() {
       timeoutMs: opts.timeout,
       concurrency: opts.concurrency,
       startPage: opts.start,
-      endPage: opts.end
+      endPage: opts.end,
+      outputPath: opts.output
     });
     const duration = ((Date.now() - started) / 1000).toFixed(1);
 
@@ -52,7 +53,8 @@ async function main() {
     console.log(chalk.green(`   Registros OK: ${ok.length}`));
     console.log(chalk.yellow(`   Registros con error: ${fail}`));
 
-    await writeCsv(opts.output, results);
+    // Ya escribimos incrementalmente; no sobrescribir el CSV al final para no duplicar
+    // Si se desea exportar un snapshot completo aparte, se puede usar otra ruta de salida.
     console.log(chalk.cyan(`\n📄 CSV guardado en ${opts.output}`));
   } catch (err) {
     console.error(chalk.red(`Error crítico: ${(err as Error).message}`));

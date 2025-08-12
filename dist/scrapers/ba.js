@@ -8,6 +8,7 @@ const p_limit_1 = __importDefault(require("p-limit"));
 const organization_1 = require("../types/organization");
 const browser_1 = require("../utils/browser");
 const logger_1 = require("../utils/logger");
+const csv_1 = require("../utils/csv");
 const BASE = 'https://buenosaires.gob.ar';
 const SEARCH = `${BASE}/organizaciones-civiles-buscador`;
 const buildSearchUrl = (page) => {
@@ -121,18 +122,26 @@ const runBAScraper = async (page, options) => {
         lastPage = totalPages;
         logger_1.logger.info(`Páginas totales detectadas: ${totalPages}. Rango a procesar: ${options.startPage}-${lastPage}`);
     }
-    // Reusar la misma page para listar links por página
-    const allLinks = [];
+    // Reusar la misma page para listar links por página y procesar por lotes con escritura incremental
+    const allResults = [];
     for (let p = options.startPage; p <= lastPage; p++) {
         const links = await (0, exports.extractLinksFromPage)(page, p);
         logger_1.logger.info(`Página ${p}: ${links.length} enlaces`);
-        allLinks.push(...links);
+        const limit = (0, p_limit_1.default)(options.concurrency);
+        const tasks = links.map((url) => limit(() => (0, exports.extractOrganization)(options.browser, url, options.timeoutMs)));
+        const batch = await Promise.all(tasks);
+        // Escritura incremental por página
+        try {
+            await (0, csv_1.appendCsv)(options.outputPath, batch);
+            logger_1.logger.info(`Escritos ${batch.length} registros al CSV (página ${p}).`);
+        }
+        catch (err) {
+            logger_1.logger.warn(`Error escribiendo CSV en página ${p}: ${err.message}`);
+        }
+        allResults.push(...batch);
         await page.waitForTimeout(500);
     }
-    const limit = (0, p_limit_1.default)(options.concurrency);
-    const tasks = allLinks.map((url) => limit(() => (0, exports.extractOrganization)(options.browser, url, options.timeoutMs)));
-    const results = await Promise.all(tasks);
-    return results;
+    return allResults;
 };
 exports.runBAScraper = runBAScraper;
 //# sourceMappingURL=ba.js.map
