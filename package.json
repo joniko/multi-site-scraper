@@ -1,7 +1,7 @@
 {
-  "name": "ba-organizaciones-scraper",
+  "name": "multi-site-scraper",
   "version": "1.0.0",
-  "description": "High-performance scraper for Buenos Aires civil organizations - optimized for speed and accuracy",
+  "description": "Modular multi-site web scraper with pipeline architecture - supports multiple sites with unified CLI",
   "main": "dist/cli/index.js",
   "scripts": {
     "start": "node dist/cli/index.js",
@@ -30,11 +30,12 @@
   },
   "keywords": [
     "scraping",
+    "crawler",
     "puppeteer", 
-    "buenos-aires",
-    "organizations",
-    "civil-society",
-    "typescript"
+    "multi-site",
+    "pipeline",
+    "typescript",
+    "web-scraping"
   ],
   "author": "Your Name",
   "license": "MIT"
